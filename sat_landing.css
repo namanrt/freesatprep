@@ -1,0 +1,227 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #d9d5d1;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 80px 40px 60px;
+}
+
+.hero-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-title .line1 { align-self: flex-start; }
+.hero-title .line2 { align-self: center; }
+.hero-title .line3 { align-self: flex-end; }
+
+.daily-label {
+  font-size: 20px;
+  font-weight: 400;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+.daily {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 40px 60px;
+}
+
+.question-card {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  max-width: 680px;
+  align-items: flex-start;
+}
+
+.question-box {
+  flex: 1;
+  background: #d4b8b8;
+  border-radius: 4px;
+  min-height: 250px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.options-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-self: center;
+}
+
+.option-btn {
+  background: #d4b8b8;
+  border: none;
+  border-radius: 4px;
+  padding: 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.15s;
+}
+.option-btn:hover { background: #c4a8a8; }
+
+.dont-know-btn {
+  align-self: flex-end;
+  margin-top: 4px;
+  background: #c0504d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+.dont-know-btn:hover { opacity: 0.9; }
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  height: 12px;
+  background: #e0d8b8;
+}
+
+.practiceMore {
+  margin-top: 4px;
+  background: #c0504d;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  cursor: pointer;
+}
+.practiceMore:hover { opacity: 0.9; }
+
+
+/* PHOTOS SECTION */
+.photos-section {
+  width: 100%;
+  padding: 40px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.photos-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  color: #111;
+  align-self: center;
+}
+
+/* The track overflows so side photos peek in */
+.carousel-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s ease;
+  will-change: transform;
+}
+
+.carousel-slide {
+  min-width: 72%;
+  margin: 0 2%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #d4b8b8;
+  aspect-ratio: 16/9;
+  flex-shrink: 0;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-slide .placeholder-label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+/* Arrows overlaid on the carousel */
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.carousel-arrow:hover { background: rgba(0,0,0,0.45); }
+.carousel-arrow.left { left: 16px; }
+.carousel-arrow.right { right: 16px; }
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  align-self: center;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c4a8a8;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.carousel-dot.active { background: #2a2a2a; }

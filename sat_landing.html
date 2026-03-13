@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free SAT Test Prep</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="sat_landing.css">
+</head>
+<body>
+
+<section class="hero">
+  <h1 class="hero-title">
+    <span class="line1">Free</span>
+    <span class="line2">SAT</span>
+    <span class="line3">Test Prep</span>
+  </h1>
+</section>
+
+<section class="daily">
+  <p class="daily-label">Daily SAT Question</p>
+  <div class="question-card">
+    <div class="question-box" id="questionBox">QUESTION</div>
+    <div class="options-col" id="optionsCol">
+      <button class="option-btn"></button>
+      <button class="option-btn"></button>
+      <button class="option-btn"></button>
+      <button class="option-btn"></button>
+      <button class="dont-know-btn">Dont Know?</button>
+    </div>
+  </div>
+</section>
+
+<button class="practiceMore">Do You Want More Practice?</button>
+
+<!-- PHOTOS SECTION -->
+<section class="photos-section">
+  <h2 class="photos-title">Photos</h2>
+  <div class="carousel-wrapper">
+    <button class="carousel-arrow left" id="prevBtn">&#8592;</button>
+    <div class="carousel-track" id="carouselTrack">
+      <!-- Replace placeholder divs with <img src="yourphoto.jpg"> inside each slide -->
+      <div class="carousel-slide"><div class="placeholder-label">photo1.jpg</div></div>
+      <div class="carousel-slide"><div class="placeholder-label">photo2.jpg</div></div>
+      <div class="carousel-slide"><div class="placeholder-label">photo3.jpg</div></div>
+      <div class="carousel-slide"><div class="placeholder-label">photo4.jpg</div></div>
+      <div class="carousel-slide"><div class="placeholder-label">photo5.jpg</div></div>
+    </div>
+    <button class="carousel-arrow right" id="nextBtn">&#8594;</button>
+  </div>
+  <div class="carousel-dots" id="carouselDots"></div>
+</section>
+
+<footer></footer>
+
+<script src="questions.js"></script>
+<script src="sat_landing.js"></script>
+</body>
+</html>
