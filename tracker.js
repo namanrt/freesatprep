@@ -164,6 +164,7 @@
       await saveStats(stats);
     } catch (e) {}
   }
+
   function _chk(n) {
     n = +n;
     if (isNaN(n) || !Number.isInteger(n)) return false;
