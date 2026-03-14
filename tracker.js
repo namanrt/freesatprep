@@ -1,6 +1,6 @@
 (function () {
-  const BIN_ID = 'REPLACE_WITH_YOUR_BIN_ID';
-  const API_KEY = 'REPLACE_WITH_YOUR_JSONBIN_API_KEY';
+  const BIN_ID = '69b4c063b7ec241ddc686bd7';
+  const API_KEY = '$2a$10$i96ZlacCYBbYPjVnqJtHT.wNlxB2hRk7WHGsDDF1UWgpPy3Ynxz4C';
   const BASE = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
 
   const VISITOR_KEY = 'sat_visitor_id';
@@ -164,6 +164,7 @@
       await saveStats(stats);
     } catch (e) {}
   }
+
 
   function _chk(n) {
     n = +n;
