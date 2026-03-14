@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<a href="index.html" class="site-title">Free SAT Practice</a>
+<a href="sat_landing.html" class="site-title">Free SAT Practice</a>
 
 <div class="card">
 
@@ -101,7 +101,20 @@
       <button class="subject-btn">Math</button>
       <button class="subject-btn">Both</button>
     </div>
-    <button class="skip-btn">Skip?</button>
+    <div style="display:flex;gap:10px;">
+      <button class="ask-ai-btn" id="askAiBtn">🤖 Ask AI</button>
+      <button class="skip-btn">Skip?</button>
+    </div>
+  </div>
+
+  <div class="ai-panel" id="aiPanel">
+    <div class="ai-panel-header">
+      <span class="ai-panel-title">🤖 AI Tutor</span>
+      <button class="ai-close-btn" id="aiCloseBtn">✕</button>
+    </div>
+    <div class="ai-panel-body" id="aiPanelBody">
+      <p class="ai-placeholder">Press "Ask AI" to get a step-by-step explanation of the current question.</p>
+    </div>
   </div>
 
 </div>

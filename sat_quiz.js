@@ -98,6 +98,7 @@ function loadQuestion(index) {
 
   document.getElementById('notepadArea').value = '';
   updateToolPanel(q.section);
+  if (window.__satTracker) window.__satTracker.onQuestionLoad();
 }
 
 function findNextMatchingIndex(section) {
@@ -141,7 +142,12 @@ document.querySelectorAll('.option-btn').forEach(btn => {
     });
 
     answeredCount++;
-    if (btn.textContent === q.answer) correctCount++;
+    const isCorrect = btn.textContent === q.answer;
+    if (isCorrect) correctCount++;
+    if (window.__satTracker) {
+      window.__satTracker.onAnswer(isCorrect, q.question);
+      if (!isCorrect) window.__satTracker.onMissed(q.question);
+    }
     updateProgress();
 
     setTimeout(() => loadQuestion(currentIndex + 1), 1200);
@@ -192,8 +198,11 @@ document.querySelector('.skip-btn').addEventListener('click', () => {
     b.style.color = '#fff';
   });
 
+  if (window.__satTracker) {
+    window.__satTracker.onSkip(q.question);
+    window.__satTracker._lastSkipped = q.question;
+  }
   setTimeout(() => loadQuestion(currentIndex + 1), 1200);
-});
 
 document.getElementById('notepadClearBtn').addEventListener('click', () => {
   document.getElementById('notepadArea').value = '';
@@ -323,4 +332,48 @@ document.getElementById('wbSize').addEventListener('input', e => {
 
 document.getElementById('wbClearBtn').addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+const askAiBtn = document.getElementById('askAiBtn');
+const aiPanel = document.getElementById('aiPanel');
+const aiPanelBody = document.getElementById('aiPanelBody');
+
+document.getElementById('aiCloseBtn').addEventListener('click', () => {
+  aiPanel.classList.remove('visible');
+});
+
+askAiBtn.addEventListener('click', () => {
+  if (!filteredQuestions.length) return;
+  const q = filteredQuestions[currentIndex];
+  if (!q) return;
+
+  const prompt = `You are an SAT tutor.
+Please solve the following SAT question and explain it clearly.
+
+Question:
+${q.question}
+
+Answer Choices:
+A) ${q.options[0]}
+B) ${q.options[1]}
+C) ${q.options[2]}
+D) ${q.options[3]}
+
+Instructions:
+1. Tell me the correct answer.
+2. Explain step-by-step why it is correct.
+3. Explain why each of the other answers is wrong.
+4. Keep the explanation simple like you are teaching a high school student.`;
+
+  aiPanelBody.innerHTML = '<p class="ai-prompt-text" id="aiPromptText"></p><button class="ai-copy-btn" id="aiCopyBtn">📋 Copy Prompt</button><p class="ai-copy-hint">Paste this into ChatGPT, Claude, or any AI!</p>';
+  document.getElementById('aiPromptText').textContent = prompt;
+
+  document.getElementById('aiCopyBtn').addEventListener('click', () => {
+    navigator.clipboard.writeText(prompt).then(() => {
+      document.getElementById('aiCopyBtn').textContent = '✅ Copied!';
+      setTimeout(() => { document.getElementById('aiCopyBtn').textContent = '📋 Copy Prompt'; }, 2000);
+    });
+  });
+
+  aiPanel.classList.add('visible');
 });
