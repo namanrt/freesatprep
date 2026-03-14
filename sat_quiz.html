@@ -9,17 +9,14 @@
 </head>
 <body>
 
-<!-- POPUP MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
-
     <div class="modal-step" id="step1">
       <h2 class="modal-title">What's your goal?</h2>
       <p class="modal-sub">Enter the % you want to achieve</p>
       <input class="modal-input" id="goalInput" type="number" min="1" max="100" placeholder="e.g. 80">
       <button class="modal-btn" id="toStep2">Next →</button>
     </div>
-
     <div class="modal-step hidden" id="step2">
       <h2 class="modal-title">Which section?</h2>
       <p class="modal-sub">Choose what you want to practice</p>
@@ -30,7 +27,6 @@
       </div>
       <button class="modal-btn" id="startBtn" disabled>Start Practice</button>
     </div>
-
   </div>
 </div>
 
@@ -46,12 +42,56 @@
   </div>
 
   <div class="question-row">
-    <div class="question-box">QUESTION</div>
-    <div class="options-col">
+    <div class="question-box" id="questionBox">QUESTION</div>
+    <div class="options-col" id="optionsCol">
       <button class="option-btn">Option A</button>
       <button class="option-btn">Option B</button>
       <button class="option-btn">Option C</button>
       <button class="option-btn">Option D</button>
+    </div>
+  </div>
+
+  <div class="tool-panel" id="englishTools">
+    <div class="tool-panel-body">
+      <textarea class="notepad-area" id="notepadArea" placeholder="Jot down notes…"></textarea>
+      <button class="notepad-clear-btn" id="notepadClearBtn">Clear</button>
+    </div>
+  </div>
+
+  <div class="tool-panel" id="mathTools">
+    <div class="tool-panel-tabs">
+      <button class="tool-tab active" id="mathTabWB">✏️ Whiteboard</button>
+      <button class="tool-tab" id="mathTabCalc">🧮 Calculator</button>
+      <button class="tool-tab" id="mathTabGraph">📈 2D Graph</button>
+    </div>
+    <div class="tool-panel-body">
+
+      <div class="math-sub-panel visible" id="panelWhiteboard">
+        <div class="whiteboard-wrap">
+          <div class="whiteboard-toolbar">
+            <button class="wb-tool-btn active" id="wbPenBtn">Pen</button>
+            <button class="wb-tool-btn" id="wbEraserBtn">Eraser</button>
+            <span class="wb-divider"></span>
+            <div class="wb-color-swatch active" data-color="#111111" style="background:#111111;" title="Black"></div>
+            <div class="wb-color-swatch" data-color="#e53935" style="background:#e53935;" title="Red"></div>
+            <div class="wb-color-swatch" data-color="#1e88e5" style="background:#1e88e5;" title="Blue"></div>
+            <div class="wb-color-swatch" data-color="#43a047" style="background:#43a047;" title="Green"></div>
+            <span class="wb-divider"></span>
+            <input class="wb-size-slider" id="wbSize" type="range" min="1" max="20" value="3" title="Brush size">
+            <button class="wb-clear-btn" id="wbClearBtn">Clear</button>
+          </div>
+          <canvas class="wb-canvas" id="wbCanvas"></canvas>
+        </div>
+      </div>
+
+      <div class="math-sub-panel" id="panelCalc">
+        <div class="desmos-wrap" id="desmosCalc"></div>
+      </div>
+
+      <div class="math-sub-panel" id="panelGraph">
+        <div class="desmos-wrap" id="desmosGraph"></div>
+      </div>
+
     </div>
   </div>
 
@@ -66,6 +106,7 @@
 
 </div>
 
+<script src="https://www.desmos.com/api/v1.9/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
 <script src="questions.js"></script>
 <script src="sat_quiz.js"></script>
 </body>

@@ -1,4 +1,3 @@
-// ── DAILY QUESTION ──
 const today = new Date();
 const dayIndex = (today.getFullYear() * 365 + today.getMonth() * 31 + today.getDate()) % questions.length;
 const dailyQ = questions[dayIndex];
@@ -11,7 +10,6 @@ optionBtns.forEach((btn, i) => {
   btn.textContent = dailyQ.options[i];
 });
 
-// ── OPTION CLICK — show correct/wrong ──
 optionBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     if (btn.disabled) return;
@@ -28,7 +26,6 @@ optionBtns.forEach(btn => {
   });
 });
 
-// ── DONT KNOW ──
 document.querySelector('.dont-know-btn').addEventListener('click', () => {
   optionBtns.forEach(b => {
     b.disabled = true;
@@ -42,18 +39,15 @@ document.querySelector('.dont-know-btn').addEventListener('click', () => {
   });
 });
 
-// ── PRACTICE MORE ──
 document.querySelector('.practiceMore').addEventListener('click', () => {
   window.location.href = 'sat_quiz.html';
 });
 
-// ── CAROUSEL ──
 const track = document.getElementById('carouselTrack');
 const dotsContainer = document.getElementById('carouselDots');
-const slideWidth = 76; // 72% width + 2% margin each side
+const slideWidth = 76;
 let current = 0;
 
-// Clone first and last slides for infinite peek
 const originalSlides = Array.from(track.querySelectorAll('.carousel-slide'));
 const firstClone = originalSlides[0].cloneNode(true);
 const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
@@ -63,12 +57,11 @@ track.insertBefore(lastClone, originalSlides[0]);
 const allSlides = track.querySelectorAll('.carousel-slide');
 const total = originalSlides.length;
 
-// Build dots (only for real slides)
 originalSlides.forEach((_, i) => {
   const dot = document.createElement('div');
   dot.classList.add('carousel-dot');
   if (i === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => goTo(i + 1)); // offset by 1 for clone
+  dot.addEventListener('click', () => goTo(i + 1));
   dotsContainer.appendChild(dot);
 });
 
@@ -86,19 +79,15 @@ function goTo(index, animate = true) {
   track.style.transform = `translateX(calc(-${offset}% + 12%))`;
   current = index;
 
-  // Update dots (subtract 1 for the prepended clone)
   const realIndex = ((index - 1) + total) % total;
   updateDots(realIndex);
 }
 
-// Handle infinite looping after transition ends
 track.addEventListener('transitionend', () => {
   if (current === 0) {
-    // Jumped to last clone — silently jump to real last
     goTo(total, false);
   }
   if (current === total + 1) {
-    // Jumped to first clone — silently jump to real first
     goTo(1, false);
   }
 });
@@ -106,5 +95,4 @@ track.addEventListener('transitionend', () => {
 document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
 document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
 
-// Start at real first slide (index 1 because of prepended clone)
 goTo(1, false);

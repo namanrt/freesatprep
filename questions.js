@@ -1,5 +1,4 @@
 const questions = [
-  // MATH
   {
     question: "1 + 1 = ?",
     options: ["1", "2", "3", "4"],
@@ -60,8 +59,6 @@ const questions = [
     answer: "15",
     section: "Math"
   },
-
-  // ENGLISH
   {
     question: "Which word is a noun?",
     options: ["Run", "Happy", "Dog", "Quickly"],

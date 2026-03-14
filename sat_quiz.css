@@ -23,7 +23,6 @@ body {
 }
 .site-title:hover { opacity: 0.6; }
 
-/* MAIN CARD */
 .card {
   width: 100%;
   max-width: 1140px;
@@ -35,7 +34,6 @@ body {
   gap: 20px;
 }
 
-/* PROGRESS */
 .progress-wrap {
   display: flex;
   flex-direction: column;
@@ -62,9 +60,9 @@ body {
   width: 83%;
   background: #4a90d9;
   border-radius: 10px;
+  transition: width 0.3s, background 0.3s;
 }
 
-/* QUESTION + OPTIONS ROW */
 .question-row {
   display: flex;
   gap: 24px;
@@ -82,6 +80,8 @@ body {
   color: #555;
   font-size: 14px;
   letter-spacing: 0.06em;
+  padding: 24px;
+  text-align: center;
 }
 
 .options-col {
@@ -103,10 +103,8 @@ body {
   text-align: center;
   transition: background 0.15s;
 }
-.option-btn:hover { background: #c4a4a4; }
-.option-btn.selected { background: #c4a4a4; outline: 2px solid #4a90d9; }
+.option-btn:hover:not(:disabled) { background: #c4a4a4; }
 
-/* BOTTOM ROW */
 .bottom-row {
   display: flex;
   justify-content: space-between;
@@ -146,7 +144,6 @@ body {
 }
 .skip-btn:hover { opacity: 0.8; }
 
-/* MODAL */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -233,8 +230,160 @@ body {
 .modal-btn:hover:not(:disabled) { opacity: 0.8; }
 .modal-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-/* green progress bar after modal */
 .progress-bar-fill.green { background: #4caf50; }
-
 .progress-bar-fill.red { background: #e53935; }
 .progress-bar-fill.blue { background: #4a90d9; }
+
+.tool-panel {
+  display: none;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #cdc8c3;
+}
+
+.tool-panel.visible {
+  display: flex;
+}
+
+.tool-panel-tabs {
+  display: flex;
+  background: #c0bcb8;
+}
+
+.tool-tab {
+  flex: 1;
+  padding: 9px 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #555;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tool-tab:hover { color: #111; }
+.tool-tab.active { color: #111; border-bottom-color: #4a90d9; }
+
+.tool-panel-body {
+  padding: 12px;
+}
+
+.notepad-area {
+  width: 100%;
+  height: 90px;
+  resize: none;
+  background: #f5f0e8;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  outline: none;
+}
+.notepad-area:focus { outline: 2px solid #4a90d9; }
+
+.notepad-clear-btn {
+  margin-top: 6px;
+  background: none;
+  border: 1px solid #b8b4b0;
+  border-radius: 5px;
+  padding: 4px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #777;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: block;
+}
+.notepad-clear-btn:hover { background: #b8b4b0; color: #111; }
+
+.math-sub-panel { display: none; }
+.math-sub-panel.visible { display: block; }
+
+.whiteboard-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.whiteboard-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wb-tool-btn {
+  background: #b8b4b0;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.wb-tool-btn:hover { background: #a8a4a0; }
+.wb-tool-btn.active { background: #4a90d9; color: #fff; }
+
+.wb-divider {
+  width: 1px;
+  height: 20px;
+  background: #a8a4a0;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+.wb-color-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+.wb-color-swatch.active { border-color: #111; }
+
+.wb-size-slider {
+  width: 80px;
+  accent-color: #4a90d9;
+  cursor: pointer;
+}
+
+.wb-clear-btn {
+  background: none;
+  border: 1px solid #b8b4b0;
+  border-radius: 5px;
+  padding: 5px 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #777;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-left: auto;
+}
+.wb-clear-btn:hover { background: #b8b4b0; color: #111; }
+
+.wb-canvas {
+  width: 100%;
+  height: 220px;
+  border-radius: 6px;
+  background: #fff;
+  cursor: crosshair;
+  display: block;
+  touch-action: none;
+}
+
+.desmos-wrap {
+  width: 100%;
+  height: 300px;
+  border-radius: 6px;
+  overflow: hidden;
+}
