@@ -203,6 +203,7 @@ document.querySelector('.skip-btn').addEventListener('click', () => {
     window.__satTracker._lastSkipped = q.question;
   }
   setTimeout(() => loadQuestion(currentIndex + 1), 1200);
+});
 
 document.getElementById('notepadClearBtn').addEventListener('click', () => {
   document.getElementById('notepadArea').value = '';
