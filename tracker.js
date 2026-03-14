@@ -250,7 +250,6 @@
     if (_chk(n)) {
       _printStats();
     } else {
-      // fail silently — looks like nothing happened
       void 0;
     }
   };
