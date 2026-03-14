@@ -61,7 +61,8 @@ function updateProgress() {
     progressLabel.textContent = 'Goal: ' + goalPercent + '%';
     progressFill.style.width = '100%';
     progressFill.classList.remove('red');
-    progressFill.classList.add('green');
+    progressFill.classList.remove('green');
+    progressFill.classList.add('blue');
     return;
   }
   const pct = Math.round((correctCount / answeredCount) * 100);
@@ -99,18 +100,6 @@ function loadQuestion(index) {
   document.getElementById('notepadArea').value = '';
   updateToolPanel(q.section);
   if (window.__satTracker) window.__satTracker.onQuestionLoad();
-}
-
-function findNextMatchingIndex(section) {
-  let i = currentIndex + 1;
-  let attempts = 0;
-  while (attempts < filteredQuestions.length) {
-    if (i >= filteredQuestions.length) i = 0;
-    if (filteredQuestions[i].section === section) return i;
-    i++;
-    attempts++;
-  }
-  return currentIndex;
 }
 
 function updateToolPanel(section) {
@@ -202,6 +191,19 @@ document.querySelector('.skip-btn').addEventListener('click', () => {
     window.__satTracker.onSkip(q.question);
     window.__satTracker._lastSkipped = q.question;
   }
+  setTimeout(() => loadQuestion(currentIndex + 1), 1200);
+});
+
+document.getElementById('nextBtn').addEventListener('click', () => {
+  const q = filteredQuestions[currentIndex];
+  if (!q) return;
+
+  document.querySelectorAll('.option-btn').forEach(b => {
+    b.disabled = true;
+    b.style.background = b.textContent === q.answer ? '#4caf50' : '#2a2a2a';
+    b.style.color = '#fff';
+  });
+
   setTimeout(() => loadQuestion(currentIndex + 1), 1200);
 });
 

@@ -144,6 +144,20 @@ body {
 }
 .skip-btn:hover { opacity: 0.8; }
 
+.next-btn {
+  background: #2a2a2a;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.next-btn:hover { opacity: 0.8; }
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -387,7 +401,6 @@ body {
   border-radius: 6px;
   overflow: hidden;
 }
-
 
 .ask-ai-btn {
   background: #4a90d9;
