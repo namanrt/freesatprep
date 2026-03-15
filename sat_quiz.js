@@ -13,6 +13,7 @@ let currentIndex = 0;
 let filteredQuestions = [];
 let correctCount = 0;
 let answeredCount = 0;
+let questionHistory = [];
 
 toStep2Btn.addEventListener('click', () => {
   const val = parseInt(goalInput.value);
@@ -78,13 +79,15 @@ function updateProgress() {
   }
 }
 
-function loadQuestion(index) {
+function loadQuestion(index, fromBack) {
   if (filteredQuestions.length === 0) return;
 
   if (index >= filteredQuestions.length) {
     filteredQuestions.sort(() => Math.random() - 0.5);
     index = 0;
   }
+
+  if (!fromBack) questionHistory.push(currentIndex);
   currentIndex = index;
 
   const q = filteredQuestions[currentIndex];
@@ -194,18 +197,13 @@ document.querySelector('.skip-btn').addEventListener('click', () => {
   setTimeout(() => loadQuestion(currentIndex + 1), 1200);
 });
 
-document.getElementById('nextBtn').addEventListener('click', () => {
-  const q = filteredQuestions[currentIndex];
-  if (!q) return;
-
-  document.querySelectorAll('.option-btn').forEach(b => {
-    b.disabled = true;
-    b.style.background = b.textContent === q.answer ? '#4caf50' : '#2a2a2a';
-    b.style.color = '#fff';
-  });
-
-  setTimeout(() => loadQuestion(currentIndex + 1), 1200);
+document.getElementById('backBtn').addEventListener('click', () => {
+  if (questionHistory.length <= 1) return;
+  questionHistory.pop(); // remove current
+  const prev = questionHistory.pop(); // get previous
+  loadQuestion(prev, true);
 });
+
 
 document.getElementById('notepadClearBtn').addEventListener('click', () => {
   document.getElementById('notepadArea').value = '';
@@ -368,13 +366,24 @@ Instructions:
 3. Explain why each of the other answers is wrong.
 4. Keep the explanation simple like you are teaching a high school student.`;
 
-  aiPanelBody.innerHTML = '<p class="ai-prompt-text" id="aiPromptText"></p><button class="ai-copy-btn" id="aiCopyBtn">📋 Copy Prompt</button><p class="ai-copy-hint">Paste this into ChatGPT, Claude, or any AI!</p>';
+  aiPanelBody.innerHTML = `
+    <p class="ai-prompt-text" id="aiPromptText"></p>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <button class="ai-copy-btn" id="aiCopyBtn">📋 Copy Prompt</button>
+      <p class="ai-copy-hint">Paste into ChatGPT, Claude, or any AI!</p>
+    </div>`;
+
   document.getElementById('aiPromptText').textContent = prompt;
 
   document.getElementById('aiCopyBtn').addEventListener('click', () => {
     navigator.clipboard.writeText(prompt).then(() => {
-      document.getElementById('aiCopyBtn').textContent = '✅ Copied!';
-      setTimeout(() => { document.getElementById('aiCopyBtn').textContent = '📋 Copy Prompt'; }, 2000);
+      const btn = document.getElementById('aiCopyBtn');
+      btn.textContent = '✅ Copied!';
+      btn.style.background = '#4caf50';
+      setTimeout(() => {
+        btn.textContent = '📋 Copy Prompt';
+        btn.style.background = '';
+      }, 2000);
     });
   });
 

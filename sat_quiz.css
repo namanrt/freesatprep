@@ -158,6 +158,20 @@ body {
 }
 .next-btn:hover { opacity: 0.8; }
 
+.back-btn {
+  background: #c8c4c0;
+  color: #111;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 30px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.back-btn:hover { opacity: 0.8; }
+
 .modal-overlay {
   position: fixed;
   inset: 0;
